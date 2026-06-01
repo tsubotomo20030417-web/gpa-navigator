@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+GPA Navigator β
+</title>
+
+<link
+rel="stylesheet"
+href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+</head>
+
+<body>
+
+<h1>
+GPA Navigator β
+</h1>
+
+<p>
+履修科目（カンマ区切り）
+</p>
+
+<textarea
+id="subjects"
+rows="5"
+cols="60">解析Ⅰ,線形代数Ⅰ,英語</textarea>
+
+<p>
+成績（カンマ区切り）
+</p>
+
+<textarea
+id="scores"
+rows="5"
+cols="60">90,85,70</textarea>
+
+<br><br>
+
+<button onclick="analyze()">
+分析
+</button>
+
+<hr>
+
+<pre id="result"></pre>
+
+<script src="app.js"></script>
+
+</body>
+</html>

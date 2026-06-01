@@ -1,0 +1,275 @@
+let subjectMaster = {};
+
+Papa.parse("subject_master.csv",{
+
+    download:true,
+
+    header:true,
+
+    complete:function(results){
+
+        results.data.forEach(row=>{
+
+            subjectMaster[row.subject]
+            =
+            row.category;
+
+        });
+
+        console.log("CSV読込完了");
+
+    }
+
+});
+
+function analyze(){
+
+const subjects =
+document
+.getElementById("subjects")
+.value
+.split(",");
+
+const scores =
+document
+.getElementById("scores")
+.value
+.split(",")
+.map(Number);
+
+let categoryScores = {};
+
+for(let i=0;i<subjects.length;i++){
+
+const category =
+subjectMaster[subjects[i]]
+|| "その他";
+
+if(!categoryScores[category]){
+
+categoryScores[category] = [];
+
+}
+
+categoryScores[category]
+.push(scores[i]);
+
+}
+
+let result = [];
+
+for(let category in categoryScores){
+
+const avg =
+categoryScores[category]
+.reduce((a,b)=>a+b,0)
+/
+categoryScores[category].length;
+
+result.push({
+
+category:category,
+
+avg:avg
+
+});
+
+}
+
+result.sort(
+(a,b)=>b.avg-a.avg
+);
+
+const best =
+result[0].category;
+
+let advice = "";
+
+let recommendation = {};
+
+if(best==="計算系"){
+
+recommendation = {
+
+courses:[
+"統計学Ⅱ",
+"機械学習",
+"データ分析"
+],
+
+licenses:[
+"統計検定2級",
+"基本情報技術者",
+"データサイエンス検定"
+],
+
+industries:[
+"IT",
+"金融",
+"コンサル"
+],
+
+advice:
+"計算系科目で高得点を維持しています。次学期も計算系科目を中心に履修すると高いGPAが期待できます。"
+
+};
+
+}
+
+else if(best==="語学系"){
+
+recommendation = {
+
+courses:[
+"異文化コミュニケーション",
+"国際関係論",
+"ビジネス英語"
+],
+
+licenses:[
+"TOEIC",
+"HSK",
+"IELTS"
+],
+
+industries:[
+"商社",
+"航空",
+"観光"
+],
+
+advice:
+"語学系に強みがあります。国際系科目を履修することで学習成果をさらに高められます。"
+
+};
+
+}
+
+else if(best==="社会科学系"){
+
+recommendation = {
+
+courses:[
+"経営戦略",
+"マーケティング",
+"国際経済"
+],
+
+licenses:[
+"日商簿記",
+"FP",
+"中小企業診断士"
+],
+
+industries:[
+"金融",
+"メーカー",
+"コンサル"
+],
+
+advice:
+"社会科学系科目との相性が良好です。専門科目を増やすことで高GPAが期待できます。"
+
+};
+
+}
+
+else if(best==="人文系"){
+
+recommendation = {
+
+courses:[
+"文化人類学",
+"歴史学",
+"哲学応用"
+],
+
+licenses:[
+"学芸員",
+"日本語教育能力検定"
+],
+
+industries:[
+"教育",
+"出版",
+"文化事業"
+],
+
+advice:
+"人文系分野に強みがあります。読解・考察型科目を中心に履修することを推奨します。"
+
+};
+
+}
+
+else{
+
+recommendation = {
+
+courses:[
+"専門関連科目"
+],
+
+licenses:[
+"関連資格"
+],
+
+industries:[
+"関連業界"
+],
+
+advice:
+"さらに履修データを増やすことで精度が向上します。"
+
+};
+
+}
+
+
+let output =
+"【強み分析】\n\n";
+
+result.forEach(r=>{
+
+output +=
+`${r.category} : ${r.avg.toFixed(1)}点\n`;
+
+});
+
+output +=
+`\nあなたの強みは「${best}」です。\n\n`;
+
+output += "【おすすめ履修】\n";
+
+recommendation.courses.forEach(course=>{
+
+output += `・${course}\n`;
+
+});
+
+output += "\n【おすすめ資格】\n";
+
+recommendation.licenses.forEach(license=>{
+
+output += `・${license}\n`;
+
+});
+
+output += "\n【おすすめ業界】\n";
+
+recommendation.industries.forEach(industry=>{
+
+output += `・${industry}\n`;
+
+});
+
+output += "\n【GPA向上アドバイス】\n";
+
+output += recommendation.advice;
+
+document
+.getElementById("result")
+.innerText =
+output;
+
+}
