@@ -215,6 +215,17 @@ result.sort(
 (a,b)=>b.avg-a.avg
 );
 
+if(result.length===0){
+
+document
+.getElementById("result")
+.innerText =
+"科目を選択してください";
+
+return;
+
+}
+
 const best =
 result[0].category;
 
