@@ -1,7 +1,5 @@
 let subjectMaster = {};
 
-console.log("最新版app.js");
-
 let allSubjects = [];
 
 let selectedSubjects = [];
@@ -154,6 +152,19 @@ oninput="
 selectedSubjects[${index}].score=
 Number(this.value)
 ">
+
+<button
+onclick="
+selectedSubjects.splice(
+${index},
+1
+);
+renderSubjects();
+">
+
+✕
+
+</button>
 `;
 
 container.appendChild(row);
@@ -163,6 +174,34 @@ container.appendChild(row);
 }
 
 function analyze(){
+
+  if(
+selectedSubjects.length===0
+){
+
+alert(
+"科目を選択してください"
+);
+
+return;
+
+}
+
+if(
+
+selectedSubjects.some(
+s=>!s.score
+)
+
+){
+
+alert(
+"点数を入力してください"
+);
+
+return;
+
+}
 
 const subjects =
 selectedSubjects.map(
@@ -229,7 +268,12 @@ return;
 }
 
 const best =
-result[0].category;
+
+result.find(
+r=>r.category!=="その他"
+)?.category
+
+|| result[0].category;
 
 let advice = "";
 
