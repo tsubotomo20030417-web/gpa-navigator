@@ -1,5 +1,7 @@
 let subjectMaster = {};
 
+console.log("最新版app.js");
+
 let allSubjects = [];
 
 let selectedSubjects = [];
