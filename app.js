@@ -1,5 +1,9 @@
 let subjectMaster = {};
 
+let allSubjects = [];
+
+let selectedSubjects = [];
+
 Papa.parse("subject_master.csv",{
 
     download:true,
@@ -18,24 +22,155 @@ Papa.parse("subject_master.csv",{
 
         console.log("CSV読込完了");
 
+        allSubjects =
+Object.keys(subjectMaster);
+
+initializeSearch();
+
     }
 
 });
 
+function initializeSearch(){
+
+const searchBox =
+document.getElementById(
+"subjectSearch"
+);
+
+searchBox.addEventListener(
+"input",
+function(){
+
+const keyword =
+this.value.trim();
+
+const suggestions =
+document.getElementById(
+"suggestions"
+);
+
+suggestions.innerHTML = "";
+
+if(keyword===""){
+return;
+}
+
+const matches =
+allSubjects.filter(subject=>
+
+subject.includes(keyword)
+
+).slice(0,10);
+
+matches.forEach(subject=>{
+
+const div =
+document.createElement("div");
+
+div.className =
+"suggestion";
+
+div.innerText =
+subject;
+
+div.onclick =
+function(){
+
+addSubject(subject);
+
+searchBox.value = "";
+
+suggestions.innerHTML = "";
+
+};
+
+suggestions.appendChild(div);
+
+});
+
+});
+}
+
+function addSubject(subject){
+
+const exists =
+selectedSubjects.find(
+
+s=>s.subject===subject
+
+);
+
+if(exists){
+return;
+}
+
+selectedSubjects.push({
+
+subject:subject,
+
+score:null
+
+});
+
+renderSubjects();
+
+}
+
+function renderSubjects(){
+
+const container =
+document.getElementById(
+"selectedSubjects"
+);
+
+container.innerHTML = "";
+
+selectedSubjects.forEach(
+
+(item,index)=>{
+
+const row =
+document.createElement("div");
+
+row.className =
+"subject-row";
+
+row.innerHTML =
+
+`
+<span>
+${item.subject}
+</span>
+
+<input
+type="number"
+placeholder="点数"
+value="${item.score ?? ''}"
+
+oninput="
+selectedSubjects[${index}].score=
+Number(this.value)
+">
+`;
+
+container.appendChild(row);
+
+});
+
+}
+
 function analyze(){
 
 const subjects =
-document
-.getElementById("subjects")
-.value
-.split(",");
+selectedSubjects.map(
+s=>s.subject
+);
 
 const scores =
-document
-.getElementById("scores")
-.value
-.split(",")
-.map(Number);
+selectedSubjects.map(
+s=>Number(s.score)
+);
 
 let categoryScores = {};
 
