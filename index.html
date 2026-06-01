@@ -19,39 +19,63 @@ href="style.css">
 
 <body>
 
-<h1>
-GPA Navigator β
-</h1>
+<div class="container">
 
-<p>
+<h1>GPA Navigator</h1>
+
+<p class="subtitle">
+
+履修データからあなたの強みと
+おすすめ履修を分析します
+
+</p>
+
+<div class="card">
+
+<label>
 履修科目（カンマ区切り）
-</p>
+</label>
 
 <textarea
-id="subjects"
-rows="5"
-cols="60">解析Ⅰ,線形代数Ⅰ,英語</textarea>
+id="subjects">
+解析Ⅰ,線形代数Ⅰ,英語
+</textarea>
 
-<p>
+</div>
+
+<div class="card">
+
+<label>
 成績（カンマ区切り）
-</p>
+</label>
 
 <textarea
-id="scores"
-rows="5"
-cols="60">90,85,70</textarea>
+id="scores">
+90,85,70
+</textarea>
+
+</div>
+
+<button onclick="analyze()">
+
+分析する
+
+</button>
 
 <br><br>
 
-<button onclick="analyze()">
-分析
-</button>
-
-<hr>
+<div class="card">
 
 <pre id="result"></pre>
 
-<script src="app.js"></script>
+</div>
 
+<div class="footer">
+
+GPA Navigator β
+
+</div>
+
+</div>
 </body>
 </html>
