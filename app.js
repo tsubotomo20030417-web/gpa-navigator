@@ -227,7 +227,7 @@ advice:
 
 
 let output =
-"【強み分析】\n\n";
+"🏆 強み分析\n\n";
 
 result.forEach(r=>{
 
@@ -239,7 +239,7 @@ output +=
 output +=
 `\nあなたの強みは「${best}」です。\n\n`;
 
-output += "【おすすめ履修】\n";
+output += "\n📚 おすすめ履修\n";
 
 recommendation.courses.forEach(course=>{
 
@@ -247,7 +247,7 @@ output += `・${course}\n`;
 
 });
 
-output += "\n【おすすめ資格】\n";
+output += "\n🎓 おすすめ資格\n";
 
 recommendation.licenses.forEach(license=>{
 
@@ -255,7 +255,7 @@ output += `・${license}\n`;
 
 });
 
-output += "\n【おすすめ業界】\n";
+output += "\n💼 おすすめ業界\n";
 
 recommendation.industries.forEach(industry=>{
 
@@ -263,7 +263,7 @@ output += `・${industry}\n`;
 
 });
 
-output += "\n【GPA向上アドバイス】\n";
+output += "\n🚀 GPA向上アドバイス\n";
 
 output += recommendation.advice;
 
