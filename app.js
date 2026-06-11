@@ -332,6 +332,21 @@ selectedSubjects.map(
 s=>Number(s.score)
 );
 
+const gpList =
+
+scores.map(
+scoreToGP
+);
+
+const gpa =
+
+gpList.reduce(
+(a,b)=>a+b,
+0
+)
+/
+gpList.length;
+
 let totalGP = 0;
 
 scores.forEach(score=>{
@@ -556,16 +571,19 @@ strongestSkill.skill
 console.log("レーダー値");
 console.log(radarValues);
 
-output +=
-
-`📊 推定GPA
-
-${gpa}
-
-\n\n`;
-
 let output =
-"🏆 学習特性分析\n\n";
+
+`📊 GPA予測
+
+${predictedGPA.toFixed(2)}
+※入力された科目の成績から
+神奈川大学のGP換算方式を用いて推定しています。
+※実際の累積GPAは
+履修単位数や過去成績により変動します。
+
+━━━━━━━━━━
+🏆 学習特性分析
+`;
 
 skillResult.forEach(s=>{
 
@@ -578,7 +596,7 @@ output +=
 `\nあなたの強みは「${strongestSkill.skill}」です。\n\n`;
 
 output +=
-"🎯 履修戦略\n\n";
+"🎯 履修戦略\n";
 
 if(strongestSkill.skill==="論理的思考"){
 
@@ -622,13 +640,20 @@ output +=
 
 }
 
-output +=
-
-"📈 学習特性からみた相性の良い科目\n\n";
+else if(strongestSkill.skill==="コミュニケーション"){
 
 output +=
+"コミュニケーション能力が高いため、グループワーク・対人支援・地域連携型の科目との相性が良好です。\n\n";
 
-"現在の履修実績から推定した学習特性に基づき、相性が良いと考えられる科目です。\n\n";
+}
+
+output +=
+
+"📈 学習特性からみた相性の良い科目\n";
+
+output +=
+
+"*現在の履修実績から推定した学習特性に基づき、相性が良いと考えられる科目です。\n\n";
 
 predictedCourses.forEach(
 
@@ -652,10 +677,8 @@ output +=
 
 `・${course}
 （相性度 ${predictedScore}%）
-
 ↳ ${courseReasonMap[course] || "あなたの強みとの相性が良好"}
-
-\n`;
+`;
 
 });
 
@@ -727,5 +750,16 @@ max:100
 }
 
 });
+
+}
+
+function scoreToGP(score){
+
+if(score >= 90) return 4;
+if(score >= 80) return 3;
+if(score >= 70) return 2;
+if(score >= 60) return 1;
+
+return 0;
 
 }
