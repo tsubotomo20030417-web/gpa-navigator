@@ -1,5 +1,48 @@
 let subjectMaster = {};
 
+const recommendationMap = {
+
+"論理的思考":[
+"解析Ⅱ",
+"線形代数Ⅱ",
+"経営工学総論"
+],
+
+"数値分析":[
+"確率統計学Ⅱ",
+"アカウンティング",
+"経営数学"
+],
+
+"語学力":[
+"国際コミュニケーションⅡ",
+"言語学"
+],
+
+"文章理解":[
+"哲学",
+"世界史",
+"文学"
+],
+
+"問題解決":[
+"経営学",
+"マーケティング",
+"テーマ演習"
+],
+
+"コミュニケーション":[
+"社会心理学",
+"観光とコミュニティ"
+],
+
+"創造性":[
+"アート＆デザイン",
+"文化人類学"
+]
+
+};
+
 let allSubjects = [];
 
 let selectedSubjects = [];
@@ -24,12 +67,17 @@ Papa.parse("subject_master.csv",{
 
         results.data.forEach(row=>{
 
-            subjectMaster[row.subject]
-=
-[
+           subjectMaster[row.subject] = {
+
+skills:[
 row.skill1,
 row.skill2
-];
+],
+
+group:
+row.recommend_group
+
+};
 
         });
 
@@ -257,7 +305,13 @@ categoryScores[category]
 .push(scores[i]);
 
 const skills =
-subjectMaster[subjects[i]];
+subjectMaster[subjects[i]]
+?.skills;
+
+console.log(
+subjects[i],
+skills
+);
 
 if(skills){
 
@@ -339,6 +393,48 @@ skillScores["創造性"].length
 :0
 
 ];
+
+let skillResult = [];
+
+for(let skill in skillScores){
+
+if(skillScores[skill].length){
+
+const avg =
+
+skillScores[skill]
+.reduce((a,b)=>a+b,0)
+
+/
+
+skillScores[skill].length;
+
+skillResult.push({
+
+skill:skill,
+
+avg:avg
+
+});
+
+}
+
+}
+
+skillResult.sort(
+(a,b)=>b.avg-a.avg
+);
+
+const strongestSkill =
+skillResult[0];
+
+const predictedCourses =
+
+recommendationMap[
+strongestSkill.skill
+]
+
+|| [];
 
 console.log("レーダー値");
 console.log(radarValues);
@@ -549,6 +645,27 @@ output += `・${industry}\n`;
 output += "\n🚀 GPA向上アドバイス\n";
 
 output += recommendation.advice;
+
+output +=
+
+"\n\n📈 GPA向上予測\n";
+
+predictedCourses.forEach(
+
+course=>{
+
+const predictedScore =
+
+Math.round(
+strongestSkill.avg
+);
+
+output +=
+
+`・${course}
+（予測${predictedScore}点）\n`;
+
+});
 
 document
 .getElementById("result")
