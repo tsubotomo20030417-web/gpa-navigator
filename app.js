@@ -244,6 +244,7 @@ for(let i=0;i<subjects.length;i++){
 
 const category =
 subjectMaster[subjects[i]]
+?.[0]
 || "その他";
 
 if(!categoryScores[category]){
@@ -338,6 +339,9 @@ skillScores["創造性"].length
 :0
 
 ];
+
+console.log("レーダー値");
+console.log(radarValues);
 
 result.sort(
 (a,b)=>b.avg-a.avg
