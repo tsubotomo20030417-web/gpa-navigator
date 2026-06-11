@@ -332,6 +332,49 @@ selectedSubjects.map(
 s=>Number(s.score)
 );
 
+let totalGP = 0;
+
+scores.forEach(score=>{
+
+if(score>=90){
+
+totalGP += 4;
+
+}
+
+else if(score>=80){
+
+totalGP += 3;
+
+}
+
+else if(score>=70){
+
+totalGP += 2;
+
+}
+
+else if(score>=60){
+
+totalGP += 1;
+
+}
+
+else{
+
+totalGP += 0;
+
+}
+
+});
+
+const gpa =
+
+(
+totalGP /
+scores.length
+).toFixed(2);
+
 let categoryScores = {};
 
 let skillScores = {
@@ -513,6 +556,14 @@ strongestSkill.skill
 console.log("レーダー値");
 console.log(radarValues);
 
+output +=
+
+`📊 推定GPA
+
+${gpa}
+
+\n\n`;
+
 let output =
 "🏆 学習特性分析\n\n";
 
@@ -572,7 +623,12 @@ output +=
 }
 
 output +=
-"📈 GPA向上予測\n\n";
+
+"📈 学習特性からみた相性の良い科目\n\n";
+
+output +=
+
+"現在の履修実績から推定した学習特性に基づき、相性が良いと考えられる科目です。\n\n";
 
 predictedCourses.forEach(
 
@@ -595,11 +651,11 @@ strongestSkill.avg + 10
 output +=
 
 `・${course}
-（予測${predictedScore}点）
+（相性度 ${predictedScore}%）
 
-  ↳ ${courseReasonMap[course]}
+↳ ${courseReasonMap[course] || "あなたの強みとの相性が良好"}
 
-`;
+\n`;
 
 });
 
