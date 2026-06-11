@@ -466,144 +466,42 @@ let advice = "";
 
 let recommendation = {};
 
-if(best==="計算系"){
+let output =
 
-recommendation = {
+"🏆 学習特性分析\n\n";
 
-courses:[
-"統計学Ⅱ",
-"機械学習",
-"データ分析"
-],
+skillResult.forEach(
 
-licenses:[
-"統計検定2級",
-"基本情報技術者",
-"データサイエンス検定"
-],
+s=>{
 
-industries:[
-"IT",
-"金融",
-"コンサル"
-],
+output +=
 
-advice:
-"計算系科目で高得点を維持しています。次学期も計算系科目を中心に履修すると高いGPAが期待できます。"
+`${s.skill}
+:
+${s.avg.toFixed(1)}点\n`;
 
-};
+});
 
-}
+output +=
 
-else if(best==="語学系"){
+`\nあなたの強みは
+「${strongestSkill.skill}」
+です。\n\n`;
 
-recommendation = {
+output +=
 
-courses:[
-"異文化コミュニケーション",
-"国際関係論",
-"ビジネス英語"
-],
+"📈 GPA向上予測\n\n";
 
-licenses:[
-"TOEIC",
-"HSK",
-"IELTS"
-],
+predictedCourses.forEach(
 
-industries:[
-"商社",
-"航空",
-"観光"
-],
+course=>{
 
-advice:
-"語学系に強みがあります。国際系科目を履修することで学習成果をさらに高められます。"
+output +=
 
-};
+`・${course}
+（予測${Math.round(strongestSkill.avg)}点）\n`;
 
-}
-
-else if(best==="社会科学系"){
-
-recommendation = {
-
-courses:[
-"経営戦略",
-"マーケティング",
-"国際経済"
-],
-
-licenses:[
-"日商簿記",
-"FP",
-"中小企業診断士"
-],
-
-industries:[
-"金融",
-"メーカー",
-"コンサル"
-],
-
-advice:
-"社会科学系科目との相性が良好です。専門科目を増やすことで高GPAが期待できます。"
-
-};
-
-}
-
-else if(best==="人文系"){
-
-recommendation = {
-
-courses:[
-"文化人類学",
-"歴史学",
-"哲学応用"
-],
-
-licenses:[
-"学芸員",
-"日本語教育能力検定"
-],
-
-industries:[
-"教育",
-"出版",
-"文化事業"
-],
-
-advice:
-"人文系分野に強みがあります。読解・考察型科目を中心に履修することを推奨します。"
-
-};
-
-}
-
-else{
-
-recommendation = {
-
-courses:[
-"専門関連科目"
-],
-
-licenses:[
-"関連資格"
-],
-
-industries:[
-"関連業界"
-],
-
-advice:
-"さらに履修データを増やすことで精度が向上します。"
-
-};
-
-}
-
+});
 
 let output =
 "🏆 強み分析\n\n";
