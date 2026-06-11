@@ -236,3 +236,24 @@ margin:auto;
 display:block;
 
 }
+
+.chart-container{
+
+width:100%;
+
+height:500px;
+
+position:relative;
+
+}
+
+.chart-container{
+width:100%;
+height:500px;
+position:relative;
+}
+
+#radarChart{
+width:100% !important;
+height:100% !important;
+}
