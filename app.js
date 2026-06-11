@@ -464,12 +464,48 @@ document
 .innerText =
 output;
 
+drawRadarChart();
+
+}
+
+const radarData = {
+
+labels:[
+"論理的思考",
+"数値分析",
+"文章理解",
+"語学力",
+"創造性"
+],
+
+datasets:[{
+
+label:"学習特性",
+
+data:[
+88,
+92,
+65,
+70,
+60
+],
+
+fill:true
+
+}]
+
+};
+
 function drawRadarChart(){
+
+console.log("チャート描画開始");
 
 const ctx =
 document.getElementById(
 "radarChart"
 );
+
+console.log(ctx);
 
 new Chart(ctx,{
 
@@ -493,9 +529,3 @@ max:100
 });
 
 }
-
-}
-
-
-
-
