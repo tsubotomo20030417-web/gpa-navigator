@@ -425,48 +425,27 @@ skillResult.sort(
 (a,b)=>b.avg-a.avg
 );
 
-const topSkills =
+const strongestSkill =
+skillResult[0];
 
-skillResult
-.slice(0,2);
+const topSkills =
+skillResult.slice(0,2);
 
 const predictedCourses =
-
 recommendationMap[
 strongestSkill.skill
-]
-
-|| [];
+] || [];
 
 console.log("レーダー値");
 console.log(radarValues);
 
-result.sort(
-(a,b)=>b.avg-a.avg
-);
-
-if(result.length===0){
-
-document
-.getElementById("result")
-.innerText =
-"科目を選択してください";
-
-return;
-
-}
-
 let output =
-
 "🏆 学習特性分析\n\n";
 
-skillResult.forEach(
-
-s=>{
+skillResult.forEach(s=>{
 
 output +=
-
-`${s.skill}:${s.avg.toFixed(1)}点\n`;
+`${s.skill} : ${s.avg.toFixed(1)}点\n`;
 
 });
 
