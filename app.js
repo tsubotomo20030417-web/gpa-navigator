@@ -15,8 +15,11 @@ Papa.parse("subject_master.csv",{
         results.data.forEach(row=>{
 
             subjectMaster[row.subject]
-            =
-            row.category;
+=
+[
+row.skill1,
+row.skill2
+];
 
         });
 
@@ -215,6 +218,18 @@ s=>Number(s.score)
 
 let categoryScores = {};
 
+let skillScores = {
+
+"論理的思考":[],
+"数値分析":[],
+"文章理解":[],
+"語学力":[],
+"創造性":[],
+"問題解決":[],
+"コミュニケーション":[]
+
+};
+
 for(let i=0;i<subjects.length;i++){
 
 const category =
@@ -229,6 +244,24 @@ categoryScores[category] = [];
 
 categoryScores[category]
 .push(scores[i]);
+
+const skills =
+subjectMaster[subjects[i]];
+
+if(skills){
+
+skills.forEach(skill=>{
+
+if(skillScores[skill]){
+
+skillScores[skill]
+.push(scores[i]);
+
+}
+
+});
+
+}
 
 }
 
@@ -251,6 +284,50 @@ avg:avg
 });
 
 }
+
+const radarValues = [
+
+skillScores["論理的思考"].length
+?
+skillScores["論理的思考"]
+.reduce((a,b)=>a+b,0)
+/
+skillScores["論理的思考"].length
+:0,
+
+skillScores["数値分析"].length
+?
+skillScores["数値分析"]
+.reduce((a,b)=>a+b,0)
+/
+skillScores["数値分析"].length
+:0,
+
+skillScores["文章理解"].length
+?
+skillScores["文章理解"]
+.reduce((a,b)=>a+b,0)
+/
+skillScores["文章理解"].length
+:0,
+
+skillScores["語学力"].length
+?
+skillScores["語学力"]
+.reduce((a,b)=>a+b,0)
+/
+skillScores["語学力"].length
+:0,
+
+skillScores["創造性"].length
+?
+skillScores["創造性"]
+.reduce((a,b)=>a+b,0)
+/
+skillScores["創造性"].length
+:0
+
+];
 
 result.sort(
 (a,b)=>b.avg-a.avg
