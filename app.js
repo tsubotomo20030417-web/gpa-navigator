@@ -4,6 +4,14 @@ let allSubjects = [];
 
 let selectedSubjects = [];
 
+let radarValues = [
+0,
+0,
+0,
+0,
+0
+];
+
 Papa.parse("subject_master.csv",{
 
     download:true,
@@ -285,7 +293,7 @@ avg:avg
 
 }
 
-const radarValues = [
+radarValues = [
 
 skillScores["論理的思考"].length
 ?
@@ -545,6 +553,13 @@ drawRadarChart();
 
 }
 
+function drawRadarChart(){
+
+const ctx =
+document.getElementById(
+"radarChart"
+);
+
 const radarData = {
 
 labels:[
@@ -559,13 +574,7 @@ datasets:[{
 
 label:"学習特性",
 
-data:[
-88,
-92,
-65,
-70,
-60
-],
+data:radarValues,
 
 fill:true
 
@@ -573,18 +582,13 @@ fill:true
 
 };
 
-function drawRadarChart(){
+if(radarChart){
 
-console.log("チャート描画開始");
+radarChart.destroy();
 
-const ctx =
-document.getElementById(
-"radarChart"
-);
+}
 
-console.log(ctx);
-
-new Chart(ctx,{
+radarChart = new Chart(ctx,{
 
 type:"radar",
 
