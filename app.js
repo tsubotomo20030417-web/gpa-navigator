@@ -653,6 +653,10 @@ output +=
 output +=
 "🚀 GPAブースト科目\n";
 
+output +=
+"※学習特性との相性が高く、GPA向上が期待できる科目です。\n\n";
+
+
 predictedCourses.forEach(
 
 course=>{
@@ -677,9 +681,6 @@ output +=
 （相性度 ${predictedScore}%）
 ↳ ${courseReasonMap[course] || "あなたの強みとの相性が良好"}
 `;
-output +=
-"※学習特性との相性が高く、GPA向上が期待できる科目です。\n\n";
-
 });
 
 document
@@ -763,3 +764,4 @@ if(score >= 60) return 1;
 return 0;
 
 }
+
