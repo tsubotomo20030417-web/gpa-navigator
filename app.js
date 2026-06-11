@@ -332,21 +332,6 @@ selectedSubjects.map(
 s=>Number(s.score)
 );
 
-const gpList =
-
-scores.map(
-scoreToGP
-);
-
-const gpa =
-
-gpList.reduce(
-(a,b)=>a+b,
-0
-)
-/
-gpList.length;
-
 let totalGP = 0;
 
 scores.forEach(score=>{
@@ -560,6 +545,17 @@ skillResult.sort(
 const strongestSkill =
 skillResult[0];
 
+const expectedGain =
+
+Math.max(
+0,
+(
+strongestSkill.avg - 60
+)
+/
+100
+);
+
 const topSkills =
 skillResult.slice(0,2);
 
@@ -573,13 +569,10 @@ console.log(radarValues);
 
 let output =
 
-`📊 GPA予測
-
-${predictedGPA.toFixed(2)}
-※入力された科目の成績から
-神奈川大学のGP換算方式を用いて推定しています。
-※実際の累積GPAは
-履修単位数や過去成績により変動します。
+`📊 今回履修の推定GPA
+${gpa}
+※入力された科目の成績を神奈川大学のGP換算方式に基づいて算出した参考値です。
+※累積GPAや次学期のGPAを予測するものではありません。
 
 ━━━━━━━━━━
 🏆 学習特性分析
@@ -648,12 +641,17 @@ output +=
 }
 
 output +=
-
-"📈 学習特性からみた相性の良い科目\n";
+"📈 GPA向上期待値\n";
 
 output +=
+`現在の履修傾向と比較して
+【 +${expectedGain.toFixed(2)} ～ +${(expectedGain*2).toFixed(2)} 】
+程度のGPA向上が期待されます。
+※参考値であり、実際の成績を保証するものではありません。
+\n`;
 
-"*現在の履修実績から推定した学習特性に基づき、相性が良いと考えられる科目です。\n\n";
+output +=
+"🚀 GPAブースト科目\n";
 
 predictedCourses.forEach(
 
@@ -679,6 +677,8 @@ output +=
 （相性度 ${predictedScore}%）
 ↳ ${courseReasonMap[course] || "あなたの強みとの相性が良好"}
 `;
+output +=
+"※学習特性との相性が高く、GPA向上が期待できる科目です。\n\n";
 
 });
 
