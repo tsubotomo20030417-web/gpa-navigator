@@ -425,8 +425,10 @@ skillResult.sort(
 (a,b)=>b.avg-a.avg
 );
 
-const strongestSkill =
-skillResult[0];
+const topSkills =
+
+skillResult
+.slice(0,2);
 
 const predictedCourses =
 
@@ -464,20 +466,59 @@ s=>{
 
 output +=
 
-`${s.skill}
-:
-${s.avg.toFixed(1)}点\n`;
+`${s.skill}:${s.avg.toFixed(1)}点\n`;
 
 });
 
 output +=
-
-`\nあなたの強みは
-「${strongestSkill.skill}」
-です。\n\n`;
+`\nあなたの強みは「${strongestSkill.skill}」です。\n\n`;
 
 output +=
+"🎯 履修戦略\n\n";
 
+if(strongestSkill.skill==="論理的思考"){
+
+output +=
+"論理的思考力が高いため、数学・情報・分析系科目を中心に履修すると高い成績が期待できます。\n\n";
+
+}
+
+else if(strongestSkill.skill==="数値分析"){
+
+output +=
+"数値分析力が高いため、統計・会計・データサイエンス系科目との相性が良好です。\n\n";
+
+}
+
+else if(strongestSkill.skill==="語学力"){
+
+output +=
+"語学力が高いため、国際系・語学系科目を積極的に履修することでGPA向上が期待できます。\n\n";
+
+}
+
+else if(strongestSkill.skill==="文章理解"){
+
+output +=
+"文章理解力が高いため、人文・社会科学系科目との相性が良好です。\n\n";
+
+}
+
+else if(strongestSkill.skill==="問題解決"){
+
+output +=
+"問題解決能力が高いため、経営・プロジェクト型授業・演習科目との相性が良好です。\n\n";
+
+}
+
+else if(strongestSkill.skill==="創造性"){
+
+output +=
+"創造性が高いため、デザイン・企画・発想力を活かす科目がおすすめです。\n\n";
+
+}
+
+output +=
 "📈 GPA向上予測\n\n";
 
 predictedCourses.forEach(
