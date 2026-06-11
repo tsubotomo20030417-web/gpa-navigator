@@ -12,6 +12,8 @@ let radarValues = [
 0
 ];
 
+let radarChart = null;
+
 Papa.parse("subject_master.csv",{
 
     download:true,
