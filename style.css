@@ -226,3 +226,13 @@ align-items:center;
 width:100px;
 
 }
+
+canvas{
+
+max-width:600px;
+
+margin:auto;
+
+display:block;
+
+}

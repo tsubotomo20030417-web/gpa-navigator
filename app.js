@@ -464,4 +464,38 @@ document
 .innerText =
 output;
 
+function drawRadarChart(){
+
+const ctx =
+document.getElementById(
+"radarChart"
+);
+
+new Chart(ctx,{
+
+type:"radar",
+
+data:radarData,
+
+options:{
+
+responsive:true,
+
+scales:{
+r:{
+min:0,
+max:100
 }
+}
+
+}
+
+});
+
+}
+
+}
+
+
+
+

@@ -52,9 +52,7 @@ placeholder="科目名を入力">
 履修科目一覧
 </label>
 
-<div id="selectedSubjects">
-
-</div>
+<div id="selectedSubjects"></div>
 
 </div>
 
@@ -68,17 +66,41 @@ placeholder="科目名を入力">
 
 <div class="card">
 
+<h2>
+📊 学習特性チャート
+</h2>
+
+<canvas
+id="radarChart">
+</canvas>
+
+</div>
+
+<div class="card">
+
+<h2>
+📝 分析結果
+</h2>
+
 <pre id="result"></pre>
 
 </div>
 
 <div class="footer">
 
-GPA Navigator β / Developed by Tomoki T.
+GPA Navigator β
+
+<br>
+
+Developed by Tomoki T.
 
 </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script src="app.js"></script>
+
 </body>
 </html>
