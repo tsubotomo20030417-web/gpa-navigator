@@ -43,6 +43,64 @@ const recommendationMap = {
 
 };
 
+const courseReasonMap = {
+
+"解析Ⅱ":
+"論理的思考力を活かせる",
+
+"線形代数Ⅱ":
+"数理的な分析能力を伸ばせる",
+
+"経営工学総論":
+"問題解決力との相性が高い",
+
+"確率統計学Ⅱ":
+"データ分析能力を活かせる",
+
+"アカウンティング":
+"数値分析力を活かせる",
+
+"経営数学":
+"論理的思考と数値分析を活かせる",
+
+"国際コミュニケーションⅡ":
+"語学力を活かせる",
+
+"言語学":
+"文章理解と語学力を伸ばせる",
+
+"哲学":
+"文章理解力を活かせる",
+
+"世界史":
+"読解力と考察力を活かせる",
+
+"文学":
+"文章理解力を活かせる",
+
+"経営学":
+"問題解決力を活かせる",
+
+"マーケティング":
+"分析力と企画力を活かせる",
+
+"テーマ演習":
+"実践的な問題解決力を伸ばせる",
+
+"社会心理学":
+"コミュニケーション能力を活かせる",
+
+"観光とコミュニティ":
+"対人能力を活かせる",
+
+"アート＆デザイン":
+"創造性を活かせる",
+
+"文化人類学":
+"発想力と創造性を活かせる"
+
+};
+
 let allSubjects = [];
 
 let selectedSubjects = [];
@@ -390,6 +448,22 @@ skillScores["創造性"]
 .reduce((a,b)=>a+b,0)
 /
 skillScores["創造性"].length
+:0,
+
+skillScores["問題解決"].length
+?
+skillScores["問題解決"]
+.reduce((a,b)=>a+b,0)
+/
+skillScores["問題解決"].length
+:0,
+
+skillScores["コミュニケーション"].length
+?
+skillScores["コミュニケーション"]
+.reduce((a,b)=>a+b,0)
+/
+skillScores["コミュニケーション"].length
 :0
 
 ];
@@ -504,10 +578,28 @@ predictedCourses.forEach(
 
 course=>{
 
+const predictedScore =
+
+Math.min(
+
+100,
+
+Math.round(
+
+strongestSkill.avg + 10
+
+)
+
+);
+
 output +=
 
 `・${course}
-（予測${Math.round(strongestSkill.avg)}点）\n`;
+（予測${predictedScore}点）
+
+  ↳ ${courseReasonMap[course]}
+
+`;
 
 });
 
@@ -534,7 +626,9 @@ labels:[
 "数値分析",
 "文章理解",
 "語学力",
-"創造性"
+"創造性",
+"問題解決",
+"コミュニケーション"
 ],
 
 datasets:[{
