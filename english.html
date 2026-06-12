@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+Japan Learning Explorer
+</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🌎 Japan Learning Explorer</h1>
+
+<p id="subtitle">
+Explore Japan through what you study.
+</p>
+
+<p id="subtitle2">
+Turn your courses into unforgettable experiences,
+discover hidden places, local culture, and new perspectives.
+</p>
+
+<div class="card">
+
+<label>
+Course Search
+</label>
+
+<input
+type="text"
+id="subjectSearch"
+placeholder="Enter course name">
+
+<div id="suggestions"></div>
+
+</div>
+
+<div class="card">
+
+<label>
+Selected Courses
+</label>
+
+<div id="selectedSubjects"></div>
+
+</div>
+
+<button onclick="analyze()">
+Analyze
+</button>
+
+<div class="card">
+
+<h2>
+🏆 Learning Profile
+</h2>
+
+<div id="placeImage"></div>
+
+<div id="mapButton"></div>
+
+<pre id="result"></pre>
+
+</div>
+
+</div>
+
+<script src="app_en.js"></script>
+
+</body>
+</html>
