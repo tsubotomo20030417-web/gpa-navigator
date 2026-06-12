@@ -403,7 +403,7 @@ document
 `<a
 href="${place.map}"
 target="_blank"
-class="map-btn">
+class="action-btn">
 
 📍 Open Google Maps
 
